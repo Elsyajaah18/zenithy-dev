@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenithy Development - Portofolio El Syajaah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A; /* bg-slate-900 */
+        }
+        /* Navigasi aktif */
+        .nav-link.active {
+            color: #3B82F6; /* text-blue-500 */
+            font-weight: 600;
+        }
+
+        /* Tombol Filter Proyek */
+        .filter-btn {
+            @apply px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200;
+            @apply bg-slate-700 text-slate-300;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            @apply bg-blue-600 text-white;
+        }
+
+        /* Kartu Proyek */
+        /* Perbaikan: Menghapus 'flex' dari sini, akan diterapkan di HTML */
+        .project-card {
+            @apply bg-slate-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 border-2 border-transparent;
+        }
+        .project-card:hover {
+            @apply shadow-2xl border-blue-500;
+            transform: scale(1.03);
+        }
+
+        /* Garis Waktu Pengalaman */
+        .timeline-item {
+            @apply relative pl-8 pb-12 border-l-2 border-slate-700;
+        }
+        .timeline-dot {
+            @apply absolute w-4 h-4 bg-blue-500 rounded-full -left-2 top-1;
+            border: 2px solid #0F172A; /* bg-slate-900 */
+        }
+    </style>
+</head>
+<body class="text-slate-300">
+
+    <!-- Header & Navigasi -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center h-20">
+                <!-- Logo / Nama Brand -->
+                <a href="#home" class="text-2xl font-bold text-white">
+                    ZENITHY <span class="text-blue-500">DEV</span>
+                </a>
+                
+                <!-- Navigasi Desktop -->
+                <div class="hidden md:flex gap-8">
+                    <a href="#home" class="nav-link text-slate-300 hover:text-blue-500" data-section="home">Home</a>
+                    <a href="#tentang" class="nav-link text-slate-300 hover:text-blue-500" data-section="tentang">Tentang</a>
+                    <a href="#keahlian" class="nav-link text-slate-300 hover:text-blue-500" data-section="keahlian">Keahlian</a>
+                    <a href="#proyek" class="nav-link text-slate-300 hover:text-blue-500" data-section="proyek">Proyek</a>
+                    <a href="#pengalaman" class="nav-link text-slate-300 hover:text-blue-500" data-section="pengalaman">Pengalaman</a>
+                    <a href="#kontak" class="nav-link text-slate-300 hover:text-blue-500" data-section="kontak">Kontak</a>
+                </div>
+
+                <!-- Tombol Menu Mobile -->
+                <button id="menu-btn" class="md:hidden z-50 text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+
+                <!-- Menu Mobile -->
+                <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-screen bg-slate-900 flex flex-col items-center justify-center gap-8 text-2xl">
+                    <a href="#home" class="nav-link" data-section="home">Home</a>
+                    <a href="#tentang" class="nav-link" data-section="tentang">Tentang</a>
+                    <a href="#keahlian" class="nav-link" data-section="keahlian">Keahlian</a>
+                    <a href="#proyek" class="nav-link" data-section="proyek">Proyek</a>
+                    <a href="#pengalaman" class="nav-link" data-section="pengalaman">Pengalaman</a>
+                    <a href="#kontak" class="nav-link" data-section="kontak">Kontak</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main>
+        <!-- Bagian Home -->
+        <section id="home" class="h-screen min-h-[600px] flex items-center justify-center bg-slate-900 px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-100 mb-4">
+                    Halo, saya <span class="text-blue-500">El Syajaah</span>
+                </h1>
+                <p class="text-xl md:text-3xl font-light text-slate-300 mb-8">
+                    (Dhohuk Gemalo El Syaja'ah)
+                </p>
+                <p class="text-lg md:text-2xl font-light text-slate-300 mb-8 -mt-4">
+                    Pengembang Web di Zenithy Development
+                </p>
+                <p class="max-w-2xl mx-auto text-slate-400 mb-10">
+                    Saya mengubah ide-ide kompleks menjadi aplikasi web yang elegan, fungsional, dan berpusat pada pengguna. Saya bersemangat membangun solusi digital yang memecahkan masalah nyata.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#proyek" class="px-8 py-3 bg-blue-600 text-white font-medium rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">Lihat Proyek Saya</a>
+                    <a href="#kontak" class="px-8 py-3 bg-slate-700 text-slate-100 font-medium rounded-full shadow-lg hover:bg-slate-600 transition-colors duration-300">Hubungi Saya</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Tentang -->
+        <section id="tentang" class="py-24 bg-slate-800 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Tentang Saya</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
+                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-12">
+                    Perkenalkan, saya Dhohuk Gemalo El Syaja'ah (El Syaja'ah). Seorang mahasiswa Teknik Informatika di Universitas Muhammadiyah Purwokerto yang memiliki hasrat tinggi pada pengembangan web dan teknologi. Saya aktif di berbagai organisasi kemahasiswaan dan senang menerapkan ilmu saya untuk memecahkan masalah nyata.
+                </p>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-200 mb-4">Perjalanan Saya</h3>
+                        <p class="text-slate-300 mb-4">
+                            Perjalanan saya di dunia IT dimulai sejak saya kelas 8 SMP, didorong oleh ketertarikan pada perkembangan bidang ini yang sangat pesat. Minat awal ini, dikombinasikan dengan ketertarikan pada logika dan desain, yang akhirnya membawa saya untuk mendalami Teknik Informatika di UMP.
+                        </p>
+                        <p class="text-slate-300 mb-4">
+                            Saya percaya pada filosofi kode yang bersih, desain yang fungsional, dan pembelajaran berkelanjutan.
+                        </p>
+                        <p class="text-slate-300">
+                            Selain pengembangan web, saya juga aktif di organisasi (seperti BEM, Hizbul Wathan, dan IMM) yang mengasah kemampuan kepemimpinan dan komunikasi saya. Saya selalu antusias untuk mempelajari teknologi baru dan menerapkannya untuk membangun produk yang lebih baik.
+                        </p>
+                    </div>
+                    <div class="bg-slate-700 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-200 mb-4">Fakta Singkat</h3>
+                        <ul class="space-y-3 text-slate-300">
+                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Nama: Dhohuk Gemalo El Syaja'ah</li>
+                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Studi: S1 Teknik Informatika, Univ. Muhammadiyah Purwokerto</li>
+                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Lokasi: Cilacap, Jawa Tengah</li>
+                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Keahlian: Full Stack Developer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Keahlian -->
+        <section id="keahlian" class="py-24 bg-slate-900 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Keahlian</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
+                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-16">
+                    Berikut adalah visualisasi keahlian yang saya kuasai, dari backend hingga frontend. Bagan ini menunjukkan fokus dan kompetensi saya dalam berbagai teknologi.
+                </p>
+                <div class="chart-container" style="position: relative; height:40vh; max-width: 600px; margin: auto;">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+                <div class="mt-16 text-center">
+                    <h3 class="text-2xl font-semibold text-slate-200 mb-6">Teknologi & Keterampilan</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Web Development</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">PHP</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">JavaScript (ES6+)</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">HTML5 & CSS3</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Tailwind CSS</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Git & GitHub</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Desain Grafis</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Videografi</span>
+                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Public Speaking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Proyek -->
+        <section id="proyek" class="py-24 bg-slate-800 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Proyek Pilihan</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
+                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-12">
+                    Ini adalah kumpulan proyek yang pernah saya kerjakan, baik untuk klien freelance maupun untuk organisasi dan tugas akademis. Gunakan filter di bawah untuk menjelajahi berdasarkan kategori.
+                </p>
+
+                <!-- Filter Proyek -->
+                <div id="project-filters" class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button class="filter-btn active" data-filter="semua">Semua</button>
+                    <button class="filter-btn" data-filter="frontend">Frontend</button>
+                    <button class="filter-btn" data-filter="php">PHP / Backend</button>
+                    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+                </div>
+
+                <!-- Grid Proyek -->
+                <!-- Perbaikan: Menerapkan 'flex flex-col' di kartu dan 'flex-1' di konten -->
+                <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Proyek 1 (KAFA Edu) -->
+                    <div class="project-card flex flex-col" data-category="frontend">
+                        <img src="https://placehold.co/600x400/34D399/FFFFFF?text=KAFA+Edu" alt="Proyek KAFA Edu" class="w-full h-52 object-cover">
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">KAFA Edu (Landing Page)</h3>
+                            <p class="text-slate-300 mb-4">
+                                Landing page statis yang elegan untuk sebuah lembaga pendidikan, dibuat dengan HTML, CSS, dan JavaScript murni.
+                            </p>
+                            <!-- Wrapper untuk mendorong ke bawah -->
+                            <div class="mt-auto pt-4">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2 py-1 rounded-full">HTML</span>
+                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
+                                    <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded-full">JS</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="https://elsyajaah18.github.io/KAFAEdu/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
+                                    <a href="#" class="text-slate-400 hover:underline">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyek 2 (Penerbit Amerta) -->
+                    <div class="project-card flex flex-col" data-category="frontend">
+                        <img src="https://placehold.co/600x400/F97316/FFFFFF?text=Penerbit+Amerta" alt="Proyek Penerbit Amerta" class="w-full h-52 object-cover">
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">Penerbit Amerta (Profil)</h3>
+                            <p class="text-slate-300 mb-4">
+                                Website profil perusahaan untuk penerbit buku, menampilkan katalog dan informasi kontak.
+                            </p>
+                            <!-- Wrapper untuk mendorong ke bawah -->
+                            <div class="mt-auto pt-4">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2 py-1 rounded-full">HTML</span>
+                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="https://elsyajaah18.github.io/penerbit-buku-amerta/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
+                                    <a href="#" class="text-slate-400 hover:underline">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyek 3 (E-Voting IMM Akanshori) -->
+                    <div class="project-card flex flex-col" data-category="php">
+                        <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=E-Voting+IMM" alt="Proyek E-Voting IMM Akanshori" class="w-full h-52 object-cover">
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">E-Voting IMM Akanshori</h3>
+                            <p class="text-slate-300 mb-4">
+                                Sistem e-voting untuk Musyawarah Komisariat SE cabang IMM Akanshori. Dibangun menggunakan PHP.
+                            </p>
+                            <!-- Wrapper untuk mendorong ke bawah -->
+                            <div class="mt-auto pt-4">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-indigo-200 text-indigo-900 px-2 py-1 rounded-full">PHP</span>
+                                    <span class="text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded-full">HTML</span>
+                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="https://elsyajaah18.github.io/pc-imm-akanshori/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
+                                    <a href="#" class="text-slate-400 hover:underline">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Pengalaman -->
+        <section id="pengalaman" class="py-24 bg-slate-900 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Pengalaman & Aktivitas</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
+                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-16">
+                    Perjalanan profesional dan organisasi saya telah memberi saya kesempatan untuk berkontribusi, belajar, dan bertumbuh dalam berbagai peran.
+                </p>
+                <div class="max-w-3xl mx-auto">
+                    <!-- Item Timeline 1: Freelance -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <time class="block mb-1 text-sm font-normal text-slate-400">2023 - Sekarang</time>
+                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Freelance Web Developer</h3>
+                        <h4 class="text-lg font-medium text-slate-300 mb-2">Zenithy Development</h4>
+                        <ul class="list-disc list-inside text-slate-300 space-y-1">
+                            <li>Menerima dan mengerjakan berbagai proyek website untuk klien.</li>
+                            <li>Mengembangkan sistem e-voting untuk beberapa organisasi (IMM, KPU UMP).</li>
+                            <li>Membangun website profil, pendaftaran (PKKMB), dan aplikasi laporan keuangan.</li>
+                            <li>Berfokus pada solusi berbasis PHP, HTML, CSS, dan JavaScript.</li>
+                        </ul>
+                    </div>
+                    <!-- Item Timeline 2: Magang -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <time class="block mb-1 text-sm font-normal text-slate-400">[Tanggal Magang Anda, misal: Agu - Des 2024]</time>
+                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Magang - Pengembang Aplikasi</h3>
+                        <h4 class="text-lg font-medium text-slate-300 mb-2">PT. SMILE BIRTH</h4>
+                        <ul class="list-disc list-inside text-slate-300 space-y-1">
+                            <li>Berada di posisi pengembangan aplikasi konsultasi untuk ibu hamil.</li>
+                            <li>Berkontribusi pada fitur-fitur yang mendukung kesehatan ibu dan anak.</li>
+                            <li>Bekerja dalam tim untuk merancang dan mengimplementasikan solusi teknis.</li>
+                        </ul>
+                    </div>
+                    <!-- Item Timeline 3: Organisasi -->
+                    <div class="timeline-item border-l-0">
+                        <div class="timeline-dot"></div>
+                        <time class="block mb-1 text-sm font-normal text-slate-400">2023 - 2025</time>
+                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Aktivis & Pimpinan Organisasi</h3>
+                        <h4 class="text-lg font-medium text-slate-300 mb-2">Universitas Muhammadiyah Purwokerto</h4>
+                        <ul class="list-disc list-inside text-slate-300 space-y-1">
+                            <li>Koordinator Eksekutif Muda BEM KM UMP (2024-2025).</li>
+                            <li>Kabid Hikmah Politik Kebijakan Publik di IMM Sabilul Hasbi (2023-2025).</li>
+                            <li>Anggota Bid. Medikom di Hizbul Wathan & KOKAM UMP.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Kontak -->
+        <section id="kontak" class="py-24 bg-slate-800 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold text-slate-100 mb-6">Mari Terhubung</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12">
+                    Saya saat ini terbuka untuk peluang baru dan kolaborasi proyek. Anda dapat menghubungi saya melalui email atau media sosial di bawah ini.
+                </p>
+                <a href="mailto:elsyajaah1018@gmail.com" class="inline-block px-10 py-4 bg-blue-600 text-white font-medium rounded-full text-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 mb-12">
+                    Kirim Email (elsyajaah1018@gmail.com)
+                </a>
+                <div class="flex justify-center gap-8 text-3xl">
+                    <!-- Ganti '#' dengan link media sosial Anda -->
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.039c-5.514 0-9.96 4.446-9.96 9.961s4.446 9.961 9.96 9.961 9.961-4.446 9.961-9.961S17.514 2.039 12 2.039zm0 1.631c4.604 0 8.33 3.726 8.33 8.33s-3.726 8.33-8.33 8.33-8.33-3.726-8.33-8.33 3.726-8.33 8.33-8.33zM8.223 8.049h1.73v8.33h-1.73V8.049zm.865-1.928c.57 0 1.033.463 1.033 1.033s-.463 1.033-1.033 1.033S8.055 7.724 8.055 7.154s.463-1.033 1.033-1.033zm2.597 1.928h1.662v.762h.024c.231-.438.796-.897 1.638-.897 1.753 0 2.077 1.155 2.077 2.658v3.067h-1.73v-2.73c0-.651-.012-1.488-.907-1.488-.907 0-1.047.709-1.047 1.44v2.778h-1.714V8.049z" /></svg>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6.13c-.81.36-1.68.61-2.6.71.93-.56 1.65-1.45 1.99-2.5a9.42 9.42 0 01-2.87 1.1A4.65 4.65 0 0016.5 4c-2.5 0-4.53 2.03-4.53 4.53 0 .35.04.7.12 1.03A13.06 13.06 0 013.3 5.48a4.53 4.53 0 001.4 6.05c-.75-.02-1.45-.23-2.07-.57v.06c0 2.1 1.5 3.85 3.5 4.25-.37.1-.75.15-1.15.15-.28 0-.55-.03-.81-.08.55 1.72 2.15 2.98 4.04 3.01A9.35 9.35 0 012 19.31a9.21 9.21 0 01-1.08-.06A13.02 13.02 0 008.2 21c8.64 0 13.36-7.16 13.36-13.36 0-.2 0-.41-.01-.61.92-.66 1.71-1.5 2.33-2.39z" /></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-950 text-gray-400 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; <span id="current-year"></span> El Syaja'ah - Zenithy Development. Dibuat dengan Tailwind CSS & Chart.js.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Logika Navigasi & Menu Mobile ---
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Toggle menu mobile
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.classList.toggle('open');
+                // Ganti ikon menu
+                if (menuBtn.classList.contains('open')) {
+                    menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                } else {
+                    menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
+                }
+            });
+
+            // Tutup menu saat link diklik (di mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.classList.remove('open');
+                        menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
+                    }
+                });
+            });
+
+            // --- Logika Active Link on Scroll ---
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                        const id = entry.target.id;
+                        // Hapus 'active' dari semua link
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.dataset.section === id) {
+                                // Tambah 'active' ke link yang sesuai
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.6 // 60% dari section harus terlihat
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Logika Filter Proyek ---
+            const filterContainer = document.getElementById('project-filters');
+            const projectCards = document.querySelectorAll('#project-grid .project-card');
+
+            if (filterContainer) {
+                filterContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('filter-btn') && !e.target.classList.contains('active')) {
+                        // Hapus 'active' dari tombol lama
+                        filterContainer.querySelector('.active').classList.remove('active');
+                        // Tambah 'active' ke tombol baru
+                        e.target.classList.add('active');
+                        
+                        const filter = e.target.dataset.filter;
+
+                        // Tampilkan/sembunyikan kartu proyek
+                        projectCards.forEach(card => {
+                            const category = card.dataset.category;
+                            if (filter === 'semua' || filter === category) {
+                                card.style.display = 'flex'; // Gunakan flex karena kartu adalah flex container
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+
+            // --- Logika Chart.js ---
+            const ctx = document.getElementById('skillsChart');
+            if (ctx) {
+                const skillsChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: [
+                            'PHP (Backend)', 
+                            'JavaScript', 
+                            'HTML & CSS', 
+                            'UI/UX Design', 
+                            'Database', 
+                            'DevOps (Basic)'
+                        ],
+                        datasets: [{
+                            label: 'Tingkat Keahlian',
+                            data: [85, 75, 90, 70, 75, 50],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)', // bg-blue-500 transparan
+                            borderColor: 'rgba(59, 130, 246, 1)', // border-blue-500
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Garis sudut
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Garis grid
+                                },
+                                pointLabels: {
+                                    color: 'rgba(255, 255, 255, 0.8)', // Label (PHP, JS, dll)
+                                    font: {
+                                        size: 13
+                                    }
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)', // Angka (0, 20, 40..)
+                                    backdropColor: 'rgba(0, 0, 0, 0.5)',
+                                    stepSize: 20
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'rgba(255, 255, 255, 0.8)' // Label legenda
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Tahun di Footer ---
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+
+</body>
+</html>
