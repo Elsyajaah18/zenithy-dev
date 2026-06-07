@@ -12,17 +12,16 @@
             scroll-behavior: smooth;
         }
         
-        /* KUNCI UTAMA: Mencegah scroll ke samping (horizontal scroll) */
+        /* Kunci utama pencegah horizontal scroll yang aman untuk desktop & mobile */
         html, body {
             overflow-x: hidden;
-            width: 100%;
-            position: relative;
+            max-width: 100vw;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0F172A; /* bg-slate-900 */
-            -webkit-tap-highlight-color: transparent; /* Hilangkan highlight saat tap di HP */
+            -webkit-tap-highlight-color: transparent;
         }
         
         /* Hilangkan scrollbar untuk kesan App Style di mobile */
@@ -81,13 +80,13 @@
         }
     </style>
 </head>
-<body class="text-slate-300 antialiased selection:bg-blue-500 selection:text-white pb-20 md:pb-0 overflow-x-hidden w-full">
+<body class="text-slate-300 antialiased selection:bg-blue-500 selection:text-white pb-[72px] md:pb-0">
 
     <!-- Header Desktop / App Bar Mobile -->
-    <header class="fixed top-0 left-0 right-0 z-40 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex justify-between items-center h-16 md:h-20">
-                <a href="#home" class="text-xl md:text-2xl font-bold text-white tracking-tight">
+                <a href="#home" class="text-xl md:text-2xl font-bold text-white tracking-tight shrink-0">
                     El <span class="text-blue-500">Syaja'ah</span>
                 </a>
                 
@@ -100,7 +99,7 @@
                     <a href="#pengalaman" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="pengalaman">Pengalaman</a>
                 </div>
 
-                <div class="hidden md:block">
+                <div class="hidden md:block shrink-0">
                     <a href="#kontak" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">Hubungi Saya</a>
                 </div>
             </nav>
@@ -110,45 +109,47 @@
     <main>
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl -z-10"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
+            <!-- Background Decoration dengan batas overflow -->
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
 
             <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-2 flex justify-center relative">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl transform rotate-3 scale-105 opacity-50 blur-lg -z-10"></div>
-                    <img src="https://placehold.co/400x500/1E293B/FFFFFF?text=Foto+Profil" alt="Dhohuk Gemalo El Syaja'ah" class="w-3/4 sm:w-2/3 md:w-full max-w-sm rounded-3xl shadow-2xl border border-slate-700 object-cover">
+                <div class="md:order-2 flex justify-center relative w-full">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl transform rotate-3 scale-105 opacity-50 blur-lg -z-10 pointer-events-none"></div>
+                    <!-- Ganti dengan URL foto kamu -->
+                    <img src="https://placehold.co/400x500/1E293B/FFFFFF?text=Foto+Profil" alt="Dhohuk Gemalo El Syaja'ah" class="w-[80%] sm:w-2/3 md:w-full max-w-sm rounded-3xl shadow-2xl border border-slate-700 object-cover relative z-10">
                 </div>
                 
                 <div class="md:order-1 text-center md:text-left z-10">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-blue-400 text-sm font-medium mb-6 shadow-sm">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-blue-400 text-xs sm:text-sm font-medium mb-6 shadow-sm">
                         👋 Halo, selamat datang
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 sm:mb-6 leading-tight">
                         Saya <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Dhohuk Gemalo</span>
                     </h1>
-                    <h2 class="text-xl md:text-2xl font-medium text-slate-300 mb-6">
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-medium text-slate-300 mb-4 sm:mb-6">
                         Software Engineer & Mahasiswa Informatika
                     </h2>
-                    <p class="text-slate-400 mb-10 text-lg max-w-xl mx-auto md:mx-0 leading-relaxed">
+                    <p class="text-slate-400 mb-8 sm:mb-10 text-base sm:text-lg max-w-xl mx-auto md:mx-0 leading-relaxed px-2 sm:px-0">
                         Membangun solusi digital yang efisien dan skalabel. Memadukan keahlian Web Development, Sistem Administrasi Terpusat, dan integrasi Artificial Intelligence.
                     </p>
-                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                        <a href="#proyek" class="px-8 py-3.5 bg-blue-600 text-white font-medium rounded-full shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-500/50 transition-all duration-300">Lihat Proyek Utama</a>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 px-4 sm:px-0">
+                        <a href="#proyek" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white text-center font-medium rounded-full shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all duration-300">Lihat Proyek Utama</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Tentang Section -->
-        <section id="tentang" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800">
+        <section id="tentang" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800 overflow-hidden">
             <div class="container mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Tentang Saya</h2>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Tentang Saya</h2>
                     <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
                 
                 <div class="grid md:grid-cols-12 gap-8 items-start">
-                    <div class="md:col-span-7 space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
+                    <div class="md:col-span-7 space-y-4 sm:space-y-6 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed">
                         <p>
                             Saya adalah mahasiswa tingkat akhir Teknik Informatika di Universitas Muhammadiyah Purwokerto. Perjalanan akademis saya membentuk ketahanan dan kemampuan pemecahan masalah yang kuat, mendorong saya untuk terus belajar dan beradaptasi dengan teknologi modern.
                         </p>
@@ -160,22 +161,22 @@
                         </p>
                     </div>
                     
-                    <div class="md:col-span-5 bg-slate-800/80 backdrop-blur border border-slate-700 p-6 md:p-8 rounded-2xl shadow-xl">
-                        <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                    <div class="md:col-span-5 bg-slate-800/80 backdrop-blur border border-slate-700 p-5 md:p-8 rounded-2xl shadow-xl w-full">
+                        <h3 class="text-lg font-semibold text-white mb-5 flex items-center gap-2">
                             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             Fakta Singkat
                         </h3>
-                        <ul class="space-y-4 text-slate-300 text-sm md:text-base">
+                        <ul class="space-y-3 sm:space-y-4 text-slate-300 text-xs sm:text-sm md:text-base">
                             <li class="flex items-start gap-3">
-                                <span class="text-blue-500 mt-1">✓</span>
+                                <span class="text-blue-500 mt-1 shrink-0">✓</span>
                                 <div><strong class="text-white">Pendidikan:</strong> S1 Teknik Informatika, Universitas Muhammadiyah Purwokerto (Semester 8)</div>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="text-blue-500 mt-1">✓</span>
+                                <span class="text-blue-500 mt-1 shrink-0">✓</span>
                                 <div><strong class="text-white">Fokus Saat Ini:</strong> Sistem Administrasi IMM & AI Prompt Engineering</div>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="text-blue-500 mt-1">✓</span>
+                                <span class="text-blue-500 mt-1 shrink-0">✓</span>
                                 <div><strong class="text-white">Domisili:</strong> Purwokerto / Cilacap</div>
                             </li>
                         </ul>
@@ -185,84 +186,46 @@
         </section>
 
         <!-- Keahlian Section -->
-        <section id="keahlian" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8">
-            <div class="container mx-auto">
+        <section id="keahlian" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="container mx-auto w-full">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Keahlian & Teknologi</h2>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Keahlian & Teknologi</h2>
                     <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="bg-slate-800/50 p-4 md:p-6 rounded-3xl border border-slate-700/50">
-                        <div class="chart-container relative h-[300px] md:h-[400px] w-full">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center w-full min-w-0">
+                    <!-- Perbaikan Kontainer Chart agar tidak terpotong -->
+                    <div class="bg-slate-800/50 p-2 sm:p-4 md:p-6 rounded-3xl border border-slate-700/50 w-full overflow-hidden flex justify-center">
+                        <div class="chart-container relative h-[250px] sm:h-[300px] md:h-[400px] w-full max-w-full">
                             <canvas id="skillsChart"></canvas>
                         </div>
                     </div>
 
-                    <div>
-        <!-- Proyek Section (Featured Projects) -->
-        <section id="proyek" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800">
-            <div class="container mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Proyek Utama</h2>
-                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full mb-4"></div>
-                    <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">Fokus utama pengembangan saya saat ini dalam membangun sistem informasi dan administrasi untuk efisiensi organisasi.</p>
-                </div>
-
-                <div class="max-w-5xl mx-auto space-y-12">
-                    <!-- Project 1: Sistem Admin IMM -->
-                    <div class="project-card flex flex-col md:flex-row group">
-                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800">
-                            <!-- Ganti dengan URL gambar proyekmu yang sebenarnya -->
-                            <img src="https://placehold.co/800x600/0F172A/3B82F6?text=Sistem+Admin+IMM" alt="Sistem Pemusatan Administrasi IMM" class="w-full h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90">Sedang Dibangun</div>
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="p-1.5 bg-blue-500/20 rounded-md">
-                                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                                </span>
-                                <span class="text-blue-400 text-sm font-semibold tracking-wide uppercase">Web Application</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Sistem Pemusatan Administrasi IMM</h3>
-                            <p class="text-slate-400 mb-6 text-sm md:text-base leading-relaxed">
-                                Aplikasi berbasis web terintegrasi yang dirancang untuk mendigitalisasi dan memusatkan seluruh alur administrasi Ikatan Mahasiswa Muhammadiyah (IMM). Sistem ini mengelola pendataan kader, arsip persuratan, hingga manajemen inventaris secara aman, real-time, dan terstruktur.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-auto">
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Laravel 11</span>
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Tailwind CSS</span>
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: Web PC IMM A.K. Anshori -->
-                    <div class="project-card flex flex-col md:flex-row-reverse group">
-                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800">
-                            <!-- Ganti dengan URL gambar proyekmu yang sebenarnya -->
-                            <img src="https://placehold.co/800x600/1E293B/818CF8?text=Portal+PC+IMM+A.K.+Anshori" alt="Portal Web PC IMM A.K. Anshori" class="w-full h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="p-1.5 bg-indigo-500/20 rounded-md">
-                                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                                    </span>
-                                    <span class="text-indigo-400 text-sm font-semibold tracking-wide uppercase">Web Portal</span>
+                    <div class="w-full px-2 sm:px-0">
+                        <div class="space-y-6 sm:space-y-8">
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Development</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-lg text-xs md:text-sm font-medium">Laravel & Livewire</span>
+                                    <span class="px-3 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-lg text-xs md:text-sm font-medium">PHP & MySQL</span>
+                                    <span class="px-3 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-lg text-xs md:text-sm font-medium">JavaScript & Tailwind</span>
                                 </div>
-                                <a href="https://pcimm-akanshori-purwokerto.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-700/50 px-3 py-1.5 rounded-full border border-slate-600 hover:bg-slate-600">
-                                    Kunjungi Web
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </a>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Portal Web PC IMM A.K. Anshori</h3>
-                            <p class="text-slate-400 mb-6 text-sm md:text-base leading-relaxed">
-                                Website profil organisasi dinamis yang dirancang untuk menyampaikan berita, galeri kegiatan, pangkalan data, dan informasi struktur kepengurusan. Bertindak sebagai representasi digital Pimpinan Cabang IMM A.K. Anshori di Purwokerto.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-auto">
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">PHP</span>
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Bootstrap</span>
-                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Artificial Intelligence</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-xs md:text-sm font-medium">AI Prompt Engineering</span>
+                                    <span class="px-3 py-1.5 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-xs md:text-sm font-medium">Google AI Studio</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Manajemen & Desain</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-xs md:text-sm font-medium">Manajemen Organisasi</span>
+                                    <span class="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-xs md:text-sm font-medium">Digital Marketing</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -270,27 +233,97 @@
             </div>
         </section>
 
+        <!-- Proyek Section -->
+        <section id="proyek" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800 overflow-hidden">
+            <div class="container mx-auto">
+                <div class="text-center mb-12 px-2">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Proyek Utama</h2>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full mb-4"></div>
+                    <p class="text-slate-400 max-w-2xl mx-auto text-xs sm:text-sm md:text-base">Fokus utama pengembangan saya saat ini dalam membangun sistem informasi dan administrasi untuk efisiensi organisasi.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto space-y-8 sm:space-y-12 w-full">
+                    
+                    <!-- Project 1: Sistem Admin IMM -->
+                    <div class="project-card flex flex-col md:flex-row group w-full">
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800 shrink-0">
+                            <img src="https://placehold.co/800x600/0F172A/3B82F6?text=Sistem+Admin+IMM" alt="Sistem Pemusatan Administrasi IMM" class="w-full h-48 sm:h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-blue-600 text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90">Sedang Dibangun</div>
+                        </div>
+                        <div class="p-5 sm:p-6 md:p-8 flex flex-col justify-center w-full">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="p-1.5 bg-blue-500/20 rounded-md">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </span>
+                                <span class="text-blue-400 text-xs sm:text-sm font-semibold tracking-wide uppercase">Web Application</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 leading-tight">Sistem Pemusatan Administrasi IMM</h3>
+                            <p class="text-slate-400 mb-5 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
+                                Aplikasi berbasis web terintegrasi yang dirancang untuk mendigitalisasi dan memusatkan seluruh alur administrasi Ikatan Mahasiswa Muhammadiyah (IMM). Sistem ini mengelola pendataan kader, arsip persuratan, hingga manajemen inventaris secara aman, real-time, dan terstruktur.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">Laravel 11</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">Tailwind CSS</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Web PC IMM A.K. Anshori -->
+                    <div class="project-card flex flex-col md:flex-row-reverse group w-full">
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800 shrink-0">
+                            <img src="https://placehold.co/800x600/1E293B/818CF8?text=Portal+PC+IMM+A.K.+Anshori" alt="Portal Web PC IMM A.K. Anshori" class="w-full h-48 sm:h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="p-5 sm:p-6 md:p-8 flex flex-col justify-center w-full">
+                            <div class="flex flex-wrap items-center justify-between mb-3 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="p-1.5 bg-indigo-500/20 rounded-md">
+                                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                    </span>
+                                    <span class="text-indigo-400 text-xs sm:text-sm font-semibold tracking-wide uppercase">Web Portal</span>
+                                </div>
+                                <a href="https://pcimm-akanshori-purwokerto.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-[10px] sm:text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-slate-600 hover:bg-slate-600 shrink-0">
+                                    Kunjungi Web
+                                    <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 leading-tight">Portal Web PC IMM A.K. Anshori</h3>
+                            <p class="text-slate-400 mb-5 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
+                                Website profil organisasi dinamis yang dirancang untuk menyampaikan berita, galeri kegiatan, pangkalan data, dan informasi struktur kepengurusan. Bertindak sebagai representasi digital Pimpinan Cabang IMM A.K. Anshori di Purwokerto.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">PHP</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">Bootstrap</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- Pengalaman Section -->
-        <section id="pengalaman" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8 pb-32"> <!-- pb-32 untuk memberi ruang bagi bottom nav di mobile -->
-            <div class="container mx-auto max-w-3xl">
+        <section id="pengalaman" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="container mx-auto max-w-3xl w-full">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Pengalaman & Peran</h2>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Pengalaman & Peran</h2>
                     <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
 
-                <div class="space-y-0">
+                <div class="space-y-0 pl-2">
                     <!-- Item 1 -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 ml-4 md:ml-6">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-4 sm:p-5 md:p-6 ml-3 sm:ml-4 md:ml-6 w-full">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                                 <div>
-                                    <h3 class="text-lg md:text-xl font-bold text-white">Kepala Bidang Medkom</h3>
-                                    <h4 class="text-sm md:text-base font-medium text-blue-400">Ikatan Mahasiswa Muhammadiyah</h4>
+                                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">Kepala Bidang Medkom</h3>
+                                    <h4 class="text-xs sm:text-sm md:text-base font-medium text-blue-400 mt-1">Ikatan Mahasiswa Muhammadiyah</h4>
                                 </div>
-                                <span class="inline-block bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded text-xs font-medium self-start">Saat Ini</span>
+                                <span class="inline-block bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded text-[10px] sm:text-xs font-medium self-start shrink-0">Saat Ini</span>
                             </div>
-                            <ul class="list-disc list-outside ml-4 text-sm md:text-base text-slate-400 space-y-1">
+                            <ul class="list-disc list-outside ml-4 text-xs sm:text-sm md:text-base text-slate-400 space-y-1 sm:space-y-1.5">
                                 <li>Merancang dan membangun Sistem Pemusatan Administrasi berbasis Web.</li>
                                 <li>Memimpin strategi kampanye digital dan manajemen informasi organisasi.</li>
                             </ul>
@@ -300,15 +333,15 @@
                     <!-- Item 2 -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 ml-4 md:ml-6">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-4 sm:p-5 md:p-6 ml-3 sm:ml-4 md:ml-6 w-full">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                                 <div>
-                                    <h3 class="text-lg md:text-xl font-bold text-white">Freelance Web Developer</h3>
-                                    <h4 class="text-sm md:text-base font-medium text-blue-400">Independen</h4>
+                                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">Freelance Web Developer</h3>
+                                    <h4 class="text-xs sm:text-sm md:text-base font-medium text-blue-400 mt-1">Independen</h4>
                                 </div>
-                                <span class="inline-block bg-slate-700 text-slate-300 px-2 py-1 rounded text-xs font-medium self-start">2023 - Sekarang</span>
+                                <span class="inline-block bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] sm:text-xs font-medium self-start shrink-0">2023 - Sekarang</span>
                             </div>
-                            <ul class="list-disc list-outside ml-4 text-sm md:text-base text-slate-400 space-y-1">
+                            <ul class="list-disc list-outside ml-4 text-xs sm:text-sm md:text-base text-slate-400 space-y-1 sm:space-y-1.5">
                                 <li>Mendeploy aplikasi e-voting terenkripsi untuk Musyawarah Cabang.</li>
                                 <li>Mengembangkan berbagai company profile dan landing page responsif.</li>
                             </ul>
@@ -323,7 +356,7 @@
     <!-- Bottom Navigation Bar (App Style - Khusus Mobile) -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 pb-safe pt-1 px-2 flex justify-around items-center h-[72px] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.5)]">
         <a href="#home" class="nav-link-mobile active flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="home">
-            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
@@ -331,7 +364,7 @@
         </a>
         
         <a href="#tentang" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="tentang">
-            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
@@ -339,7 +372,7 @@
         </a>
         
         <a href="#proyek" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="proyek">
-            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                 <line x1="8" y1="21" x2="16" y2="21"></line>
                 <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -348,7 +381,7 @@
         </a>
         
         <a href="#pengalaman" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="pengalaman">
-            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
@@ -357,7 +390,7 @@
 
         <a href="https://wa.me/62895357326927" target="_blank" class="flex flex-col items-center justify-center w-full h-full text-blue-500">
             <div class="bg-blue-600/20 p-1.5 rounded-full mb-0.5">
-                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                 </svg>
             </div>
@@ -367,14 +400,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Active Link on Scroll (Untuk Desktop & Mobile Bottom Nav) ---
+            // --- Active Link on Scroll ---
             const sections = document.querySelectorAll('section');
             const navLinksDesktop = document.querySelectorAll('.nav-link-desktop');
             const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
                         const id = entry.target.id;
                         
                         // Update Desktop Nav
@@ -394,7 +427,7 @@
                         });
                     }
                 });
-            }, { threshold: 0.4 });
+            }, { threshold: 0.3 });
 
             sections.forEach(section => observer.observe(section));
 
@@ -409,6 +442,9 @@
             // --- Logika Chart.js Radar ---
             const ctx = document.getElementById('skillsChart');
             if (ctx) {
+                // Konfigurasi responsif font untuk mobile
+                const isMobile = window.innerWidth < 768;
+                
                 const skillsChart = new Chart(ctx, {
                     type: 'radar',
                     data: {
@@ -429,19 +465,24 @@
                             pointBackgroundColor: '#1E293B',
                             pointBorderColor: 'rgba(59, 130, 246, 1)',
                             pointBorderWidth: 2,
-                            pointRadius: 3,
+                            pointRadius: isMobile ? 2 : 3,
                             pointHoverRadius: 5
                         }]
                     },
                     options: {
                         maintainAspectRatio: false,
+                        responsive: true,
+                        layout: {
+                            padding: isMobile ? 10 : 20 // Kurangi padding di mobile agar muat
+                        },
                         scales: {
                             r: {
                                 angleLines: { color: 'rgba(255, 255, 255, 0.05)' },
                                 grid: { color: 'rgba(255, 255, 255, 0.1)' },
                                 pointLabels: {
                                     color: 'rgba(148, 163, 184, 1)',
-                                    font: { size: window.innerWidth < 768 ? 10 : 12, family: "'Inter', sans-serif" }
+                                    // Pengecilan font di mobile agar teks tidak keluar layar
+                                    font: { size: isMobile ? 9 : 12, family: "'Inter', sans-serif" }
                                 },
                                 ticks: { display: false, min: 0, max: 100, stepSize: 20 }
                             }
@@ -450,8 +491,8 @@
                             legend: { display: false },
                             tooltip: {
                                 backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                                titleFont: { family: "'Inter', sans-serif" },
-                                bodyFont: { family: "'Inter', sans-serif" },
+                                titleFont: { family: "'Inter', sans-serif", size: isMobile ? 11 : 13 },
+                                bodyFont: { family: "'Inter', sans-serif", size: isMobile ? 11 : 13 },
                                 padding: 10,
                                 cornerRadius: 8,
                                 displayColors: false
