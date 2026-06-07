@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenithy Development - Portofolio El Syajaah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dhohuk Gemalo El Syaja'ah - Portofolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             scroll-behavior: smooth;
@@ -14,367 +14,371 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0F172A; /* bg-slate-900 */
+            -webkit-tap-highlight-color: transparent; /* Hilangkan highlight saat tap di HP */
         }
-        /* Navigasi aktif */
-        .nav-link.active {
-            color: #3B82F6; /* text-blue-500 */
+        
+        /* Hilangkan scrollbar untuk kesan App Style di mobile */
+        @media (max-width: 768px) {
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* Navigasi Desktop Aktif */
+        .nav-link-desktop.active {
+            color: #3B82F6;
             font-weight: 600;
         }
 
-        /* Tombol Filter Proyek */
-        .filter-btn {
-            @apply px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200;
-            @apply bg-slate-700 text-slate-300;
+        /* Navigasi Mobile Aktif (Bottom Nav) */
+        .nav-link-mobile {
+            transition: all 0.2s ease-in-out;
         }
-        .filter-btn.active,
-        .filter-btn:hover {
-            @apply bg-blue-600 text-white;
+        .nav-link-mobile.active {
+            color: #3B82F6;
+        }
+        .nav-link-mobile.active svg {
+            stroke: #3B82F6;
+            fill: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+        .nav-link-mobile.active span {
+            font-weight: 600;
         }
 
         /* Kartu Proyek */
         .project-card {
-            @apply bg-slate-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 border-2 border-transparent;
+            @apply bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transition-all duration-300 border border-slate-700;
         }
         .project-card:hover {
-            @apply shadow-2xl border-blue-500;
-            transform: scale(1.03);
+            @apply shadow-2xl shadow-blue-500/20 border-blue-500;
+            transform: translateY(-5px);
         }
 
         /* Garis Waktu Pengalaman */
         .timeline-item {
             @apply relative pl-8 pb-12 border-l-2 border-slate-700;
         }
+        .timeline-item:last-child {
+            @apply border-l-0 pb-0;
+        }
         .timeline-dot {
-            @apply absolute w-4 h-4 bg-blue-500 rounded-full -left-2 top-1;
-            border: 2px solid #0F172A; /* bg-slate-900 */
+            @apply absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1;
+            box-shadow: 0 0 0 4px #0F172A;
+        }
+        
+        /* Safe area bottom untuk iPhone */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
         }
     </style>
 </head>
-<body class="text-slate-300">
+<body class="text-slate-300 antialiased selection:bg-blue-500 selection:text-white pb-20 md:pb-0">
 
-    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md shadow-md">
-        <div class="container mx-auto px-4">
-            <nav class="flex justify-between items-center h-20">
-                <a href="#home" class="text-2xl font-bold text-white">
-                    ZENITHY <span class="text-blue-500">DEV</span>
+    <!-- Header Desktop / App Bar Mobile -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center h-16 md:h-20">
+                <a href="#home" class="text-xl md:text-2xl font-bold text-white tracking-tight">
+                    El <span class="text-blue-500">Syaja'ah</span>
                 </a>
                 
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex gap-8">
-                    <a href="#home" class="nav-link text-slate-300 hover:text-blue-500" data-section="home">Home</a>
-                    <a href="#tentang" class="nav-link text-slate-300 hover:text-blue-500" data-section="tentang">Tentang</a>
-                    <a href="#keahlian" class="nav-link text-slate-300 hover:text-blue-500" data-section="keahlian">Keahlian</a>
-                    <a href="#proyek" class="nav-link text-slate-300 hover:text-blue-500" data-section="proyek">Proyek</a>
-                    <a href="#pengalaman" class="nav-link text-slate-300 hover:text-blue-500" data-section="pengalaman">Pengalaman</a>
-                    <a href="#kontak" class="nav-link text-slate-300 hover:text-blue-500" data-section="kontak">Kontak</a>
+                    <a href="#home" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="home">Beranda</a>
+                    <a href="#tentang" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="tentang">Tentang</a>
+                    <a href="#keahlian" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="keahlian">Keahlian</a>
+                    <a href="#proyek" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="proyek">Proyek</a>
+                    <a href="#pengalaman" class="nav-link-desktop text-sm text-slate-300 hover:text-blue-400 transition-colors" data-section="pengalaman">Pengalaman</a>
                 </div>
 
-                <button id="menu-btn" class="md:hidden z-50 text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-
-                <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-screen bg-slate-900 flex flex-col items-center justify-center gap-8 text-2xl">
-                    <a href="#home" class="nav-link" data-section="home">Home</a>
-                    <a href="#tentang" class="nav-link" data-section="tentang">Tentang</a>
-                    <a href="#keahlian" class="nav-link" data-section="keahlian">Keahlian</a>
-                    <a href="#proyek" class="nav-link" data-section="proyek">Proyek</a>
-                    <a href="#pengalaman" class="nav-link" data-section="pengalaman">Pengalaman</a>
-                    <a href="#kontak" class="nav-link" data-section="kontak">Kontak</a>
+                <div class="hidden md:block">
+                    <a href="#kontak" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">Hubungi Saya</a>
                 </div>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="home" class="min-h-screen flex items-center bg-slate-900 px-4 pt-24 md:pt-0">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
+
             <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-2 flex justify-center">
-                    <img src="assets/foto-profil.jpg" alt="Foto Dhohuk Gemalo El Syaja'ah" class="w-3/4 sm:w-2/3 md:w-full max-w-sm lg:max-w-md rounded-2xl shadow-2xl shadow-blue-500/30">
+                <div class="md:order-2 flex justify-center relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl transform rotate-3 scale-105 opacity-50 blur-lg -z-10"></div>
+                    <img src="https://placehold.co/400x500/1E293B/FFFFFF?text=Foto+Profil" alt="Dhohuk Gemalo El Syaja'ah" class="w-3/4 sm:w-2/3 md:w-full max-w-sm rounded-3xl shadow-2xl border border-slate-700 object-cover">
                 </div>
                 
-                <div class="md:order-1 text-center md:text-left">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-100 mb-4">
-                        Halo, saya <span class="text-blue-500">El Syajaah</span>
+                <div class="md:order-1 text-center md:text-left z-10">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-blue-400 text-sm font-medium mb-6 shadow-sm">
+                        👋 Halo, selamat datang
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                        Saya <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Dhohuk Gemalo</span>
                     </h1>
-                <p class="text-lg md:text-2xl font-light text-slate-300 mb-8 -mt-4">
-                    Pengembang Web di Zenithy Development
-                </p>
-                <p class="text-slate-400 mb-10">
-                    Saya mengubah ide-ide kompleks menjadi aplikasi web yang elegan, fungsional, dan berpusat pada pengguna. Saya bersemangat membangun solusi digital komprehensif yang memecahkan masalah nyata.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                    <a href="#proyek" class="px-8 py-3 bg-blue-600 text-white font-medium rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">Lihat Proyek Saya</a>
-                    <a href="#kontak" class="px-8 py-3 bg-slate-700 text-slate-100 font-medium rounded-full shadow-lg hover:bg-slate-600 transition-colors duration-300">Hubungi Saya</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="tentang" class="py-24 bg-slate-800 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Tentang Saya</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
-                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-12">
-                    Perkenalkan, saya Dhohuk Gemalo El Syaja'ah. Seorang mahasiswa Teknik Informatika di Universitas Muhammadiyah Purwokerto yang memiliki hasrat tinggi pada pengembangan web, integrasi sistem, dan manajemen media. Saya aktif memimpin di organisasi kemahasiswaan dan senang mengimplementasikan teknologi untuk skala riil.
-                </p>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-slate-200 mb-4">Perjalanan Saya</h3>
-                        <p class="text-slate-300 mb-4">
-                            Perjalanan saya di dunia IT dimulai sejak kelas 8 SMP. Minat awal ini terus berkembang seiring ketertarikan saya pada logika sistem dan arsitektur web modern, membawa saya mendalami Teknik Informatika.
-                        </p>
-                        <p class="text-slate-300 mb-4">
-                            Saya percaya pada filosofi kode yang bersih dan desain fungsional. Saat ini, fokus eksplorasi saya meluas ke framework seperti Laravel, optimasi database, hingga AI Prompt Engineering.
-                        </p>
-                        <p class="text-slate-300">
-                            Selain *coding*, saya menjabat sebagai Kepala Departemen Media dan Komunikasi (Medkom), merancang strategi kampanye digital, dan kerap dipercaya sebagai instruktur lokakarya desain grafis.
-                        </p>
-                    </div>
-                    <div class="bg-slate-700 p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold text-slate-200 mb-4">Fakta Singkat</h3>
-                        <ul class="space-y-3 text-slate-300">
-                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Nama: Dhohuk Gemalo El Syaja'ah</li>
-                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Studi: S1 Teknik Informatika, Univ. Muhammadiyah Purwokerto</li>
-                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Lokasi: Cilacap, Jawa Tengah</li>
-                            <li><span class="font-semibold text-blue-500 mr-2">➤</span> Keahlian: Full Stack Developer & Digital Marketing</li>
-                        </ul>
+                    <h2 class="text-xl md:text-2xl font-medium text-slate-300 mb-6">
+                        Software Engineer & Mahasiswa Informatika
+                    </h2>
+                    <p class="text-slate-400 mb-10 text-lg max-w-xl mx-auto md:mx-0 leading-relaxed">
+                        Membangun solusi digital yang efisien dan skalabel. Memadukan keahlian Web Development, Sistem Administrasi Terpusat, dan integrasi Artificial Intelligence.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                        <a href="#proyek" class="px-8 py-3.5 bg-blue-600 text-white font-medium rounded-full shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-500/50 transition-all duration-300">Lihat Proyek Utama</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="keahlian" class="py-24 bg-slate-900 px-4">
+        <!-- Tentang Section -->
+        <section id="tentang" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800">
             <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Keahlian</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
-                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-16">
-                    Berikut adalah visualisasi keahlian yang saya kuasai. Saya memadukan kemampuan teknis (Backend/Frontend) dengan sentuhan kreatif dalam desain dan optimalisasi digital.
-                </p>
-                <div class="chart-container" style="position: relative; height:40vh; max-width: 600px; margin: auto;">
-                    <canvas id="skillsChart"></canvas>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Tentang Saya</h2>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
-                <div class="mt-16 text-center">
-                    <h3 class="text-2xl font-semibold text-slate-200 mb-6">Teknologi & Keterampilan</h3>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Laravel & Livewire</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">PHP & Database Management</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">JavaScript & Tailwind CSS</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Git & GitHub</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Affinity Designer & Canva</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">AI Prompt Engineering</span>
-                        <span class="px-4 py-2 bg-slate-700 text-slate-200 rounded-full font-medium">Digital Marketing Strategy</span>
+                
+                <div class="grid md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-7 space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
+                        <p>
+                            Saya adalah mahasiswa tingkat akhir Teknik Informatika di Universitas Muhammadiyah Purwokerto. Perjalanan akademis saya membentuk ketahanan dan kemampuan pemecahan masalah yang kuat, mendorong saya untuk terus belajar dan beradaptasi dengan teknologi modern.
+                        </p>
+                        <p>
+                            Saat ini, saya menjabat sebagai <strong>Kepala Bidang Media Informasi dan Komunikasi</strong> di Ikatan Mahasiswa Muhammadiyah (IMM). Dalam peran ini, saya tidak hanya memimpin strategi digital, tetapi juga memprakarsai dan membangun <strong>Sistem Pemusatan Administrasi Organisasi</strong> berbasis web untuk mendigitalisasi alur kerja organisasi berskala besar.
+                        </p>
+                        <p>
+                            Saya memiliki minat yang kuat dalam arsitektur Backend (Laravel/PHP), optimasi Frontend (Tailwind/JS), dan saat ini sedang mendalami pemanfaatan <strong>AI (Artificial Intelligence)</strong> untuk produktivitas.
+                        </p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="proyek" class="py-24 bg-slate-800 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Proyek Pilihan</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
-                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-12">
-                    Kumpulan proyek yang pernah saya kerjakan, dari *landing page* hingga sistem e-voting terintegrasi berskala regional.
-                </p>
-
-                <div id="project-filters" class="flex flex-wrap justify-center gap-3 mb-12">
-                    <button class="filter-btn active" data-filter="semua">Semua</button>
-                    <button class="filter-btn" data-filter="frontend">Frontend</button>
-                    <button class="filter-btn" data-filter="php">PHP</button>
-                    <button class="filter-btn" data-filter="fullstack">Full Stack (Laravel)</button>
-                </div>
-
-                <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     
-                    <div class="project-card flex flex-col" data-category="fullstack">
-                        <img src="https://placehold.co/600x400/EF4444/FFFFFF?text=Command+Center+%26+E-Voting" alt="Proyek E-Voting Laravel" class="w-full h-52 object-cover">
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">Sistem E-Voting & Command Center</h3>
-                            <p class="text-slate-300 mb-4">
-                                Platform pemilihan elektronik terenkripsi dan aplikasi operasional Command Center terpusat untuk manajemen Musyawarah Cabang (Musycab).
-                            </p>
-                            <div class="mt-auto pt-4">
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs bg-red-200 text-red-900 px-2 py-1 rounded-full">Laravel</span>
-                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">Livewire</span>
-                                    <span class="text-xs bg-indigo-200 text-indigo-900 px-2 py-1 rounded-full">PHP</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <span class="text-slate-400 italic text-sm">Private Repository</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="md:col-span-5 bg-slate-800/80 backdrop-blur border border-slate-700 p-6 md:p-8 rounded-2xl shadow-xl">
+                        <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Fakta Singkat
+                        </h3>
+                        <ul class="space-y-4 text-slate-300 text-sm md:text-base">
+                            <li class="flex items-start gap-3">
+                                <span class="text-blue-500 mt-1">✓</span>
+                                <div><strong class="text-white">Pendidikan:</strong> S1 Teknik Informatika, Universitas Muhammadiyah Purwokerto (Semester 8)</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-blue-500 mt-1">✓</span>
+                                <div><strong class="text-white">Fokus Saat Ini:</strong> Sistem Administrasi IMM & AI Prompt Engineering</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-blue-500 mt-1">✓</span>
+                                <div><strong class="text-white">Domisili:</strong> Purwokerto / Cilacap</div>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="project-card flex flex-col" data-category="frontend">
-                        <img src="https://placehold.co/600x400/34D399/FFFFFF?text=KAFA+Edu" alt="Proyek KAFA Edu" class="w-full h-52 object-cover">
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">KAFA Edu (Landing Page)</h3>
-                            <p class="text-slate-300 mb-4">
-                                Landing page statis yang elegan untuk sebuah lembaga pendidikan, dibuat dengan HTML, CSS, dan JavaScript murni.
-                            </p>
-                            <div class="mt-auto pt-4">
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2 py-1 rounded-full">HTML</span>
-                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
-                                    <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded-full">JS</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="https://elsyajaah18.github.io/KAFAEdu/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card flex flex-col" data-category="frontend">
-                        <img src="https://placehold.co/600x400/F97316/FFFFFF?text=Penerbit+Amerta" alt="Proyek Penerbit Amerta" class="w-full h-52 object-cover">
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">Penerbit Amerta (Profil)</h3>
-                            <p class="text-slate-300 mb-4">
-                                Website profil perusahaan untuk penerbit buku, menampilkan katalog dan informasi kontak.
-                            </p>
-                            <div class="mt-auto pt-4">
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2 py-1 rounded-full">HTML</span>
-                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="https://elsyajaah18.github.io/penerbit-buku-amerta/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card flex flex-col" data-category="php">
-                        <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=Web+Profile+PC+IMM" alt="Proyek Web Profile PC IMM A.K. Anshori" class="w-full h-52 object-cover">
-                        <div class="p-6 flex flex-col flex-1">
-                            <h3 class="text-2xl font-semibold text-slate-100 mb-3">Web Profile PC IMM A.K. Anshori</h3>
-                            <p class="text-slate-300 mb-4">
-                                Web Profile PC IMM A.K. Anshori Purwokerto untuk media informasi publik yang dinamis.
-                            </p>
-                            <div class="mt-auto pt-4">
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs bg-indigo-200 text-indigo-900 px-2 py-1 rounded-full">PHP</span>
-                                    <span class="text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded-full">HTML</span>
-                                    <span class="text-xs bg-pink-200 text-pink-900 px-2 py-1 rounded-full">CSS</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="https://elsyajaah18.github.io/pc-imm-akanshori/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <section id="pengalaman" class="py-24 bg-slate-900 px-4">
+        <!-- Keahlian Section -->
+        <section id="keahlian" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8">
             <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center text-slate-100 mb-6">Pengalaman & Aktivitas</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
-                <p class="text-lg text-center text-slate-300 max-w-3xl mx-auto mb-16">
-                    Perjalanan profesional dan organisasi saya dalam ranah rekayasa perangkat lunak dan manajemen media komunikasi.
-                </p>
-                <div class="max-w-3xl mx-auto">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <time class="block mb-1 text-sm font-normal text-slate-400">2023 - Sekarang</time>
-                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Freelance Web Developer</h3>
-                        <h4 class="text-lg font-medium text-slate-300 mb-2">Zenithy Development</h4>
-                        <ul class="list-disc list-inside text-slate-300 space-y-1">
-                            <li>Mengembangkan aplikasi e-voting terintegrasi menggunakan Laravel dan Livewire.</li>
-                            <li>Membangun infrastruktur Command Center dan manajemen administrasi acara regional.</li>
-                            <li>Menyediakan solusi web pendaftaran dan manajemen portofolio.</li>
-                        </ul>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Keahlian & Teknologi</h2>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="bg-slate-800/50 p-4 md:p-6 rounded-3xl border border-slate-700/50">
+                        <div class="chart-container relative h-[300px] md:h-[400px] w-full">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <time class="block mb-1 text-sm font-normal text-slate-400">Okt 2025 - Jan 2026</time>
-                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Digital Marketing Specialist & Programmer</h3>
-                        <h4 class="text-lg font-medium text-slate-300 mb-2">Perusahaan Penerbitan Media</h4>
-                        <ul class="list-disc list-inside text-slate-300 space-y-1">
-                            <li>Memelihara dan mengoptimalkan visibilitas digital produk perusahaan.</li>
-                            <li>Bekerja dalam tim untuk mengeksekusi strategi pemasaran digital dan kebutuhan IT internal.</li>
-                        </ul>
+
+                    <div>
+        <!-- Proyek Section (Featured Projects) -->
+        <section id="proyek" class="py-20 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-y border-slate-800">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Proyek Utama</h2>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full mb-4"></div>
+                    <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">Fokus utama pengembangan saya saat ini dalam membangun sistem informasi dan administrasi untuk efisiensi organisasi.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto space-y-12">
+                    <!-- Project 1: Sistem Admin IMM -->
+                    <div class="project-card flex flex-col md:flex-row group">
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800">
+                            <!-- Ganti dengan URL gambar proyekmu yang sebenarnya -->
+                            <img src="https://placehold.co/800x600/0F172A/3B82F6?text=Sistem+Admin+IMM" alt="Sistem Pemusatan Administrasi IMM" class="w-full h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90">Sedang Dibangun</div>
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="p-1.5 bg-blue-500/20 rounded-md">
+                                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </span>
+                                <span class="text-blue-400 text-sm font-semibold tracking-wide uppercase">Web Application</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Sistem Pemusatan Administrasi IMM</h3>
+                            <p class="text-slate-400 mb-6 text-sm md:text-base leading-relaxed">
+                                Aplikasi berbasis web terintegrasi yang dirancang untuk mendigitalisasi dan memusatkan seluruh alur administrasi Ikatan Mahasiswa Muhammadiyah (IMM). Sistem ini mengelola pendataan kader, arsip persuratan, hingga manajemen inventaris secara aman, real-time, dan terstruktur.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Laravel 11</span>
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Tailwind CSS</span>
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="timeline-item border-l-0">
-                        <div class="timeline-dot"></div>
-                        <time class="block mb-1 text-sm font-normal text-slate-400">2023 - 2027</time>
-                        <h3 class="text-xl font-semibold text-slate-100 mb-1">Pimpinan Organisasi & Instruktur</h3>
-                        <h4 class="text-lg font-medium text-slate-300 mb-2">Universitas Muhammadiyah Purwokerto</h4>
-                        <ul class="list-disc list-inside text-slate-300 space-y-1">
-                            <li><strong>Kepala Departemen Media dan Komunikasi (Medkom)</strong> (2026-2027).</li>
-                            <li>Instruktur dan Pemateri Workshop Desain Grafis & Fundamental Canva (2026).</li>
-                            <li>Koordinator Eksekutif Muda BEM KM UMP (2024-2025).</li>
-                            <li>Kabid Hikmah Politik Kebijakan Publik di IMM Sabilul Hasbi (2023-2025).</li>
-                        </ul>
+
+                    <!-- Project 2: Web PC IMM A.K. Anshori -->
+                    <div class="project-card flex flex-col md:flex-row-reverse group">
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800">
+                            <!-- Ganti dengan URL gambar proyekmu yang sebenarnya -->
+                            <img src="https://placehold.co/800x600/1E293B/818CF8?text=Portal+PC+IMM+A.K.+Anshori" alt="Portal Web PC IMM A.K. Anshori" class="w-full h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="p-1.5 bg-indigo-500/20 rounded-md">
+                                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                    </span>
+                                    <span class="text-indigo-400 text-sm font-semibold tracking-wide uppercase">Web Portal</span>
+                                </div>
+                                <a href="https://pcimm-akanshori-purwokerto.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-700/50 px-3 py-1.5 rounded-full border border-slate-600 hover:bg-slate-600">
+                                    Kunjungi Web
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Portal Web PC IMM A.K. Anshori</h3>
+                            <p class="text-slate-400 mb-6 text-sm md:text-base leading-relaxed">
+                                Website profil organisasi dinamis yang dirancang untuk menyampaikan berita, galeri kegiatan, pangkalan data, dan informasi struktur kepengurusan. Bertindak sebagai representasi digital Pimpinan Cabang IMM A.K. Anshori di Purwokerto.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">PHP</span>
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">Bootstrap</span>
+                                <span class="text-xs font-medium bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="kontak" class="py-24 bg-slate-800 px-4">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold text-slate-100 mb-6">Mari Terhubung</h2>
-                <div class="w-20 h-1 bg-blue-500 mx-auto mb-12"></div>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-12">
-                    Terbuka untuk diskusi mengenai pengembangan proyek web (terutama Laravel/PHP), kolaborasi desain, atau ngobrol soal *tech*. Hubungi aku lewat WhatsApp!
-                </p>
-                <a href="https://wa.me/62895357326927" class="inline-block px-10 py-4 bg-blue-600 text-white font-medium rounded-full text-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 mb-12">
-                    Mulai Ngobrol
-                </a>
-                <div class="flex justify-center gap-8 text-3xl">
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
-                    </a>
+        <!-- Pengalaman Section -->
+        <section id="pengalaman" class="py-20 bg-slate-900 px-4 sm:px-6 lg:px-8 pb-32"> <!-- pb-32 untuk memberi ruang bagi bottom nav di mobile -->
+            <div class="container mx-auto max-w-3xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Pengalaman & Peran</h2>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="space-y-0">
+                    <!-- Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 ml-4 md:ml-6">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-white">Kepala Bidang Medkom</h3>
+                                    <h4 class="text-sm md:text-base font-medium text-blue-400">Ikatan Mahasiswa Muhammadiyah</h4>
+                                </div>
+                                <span class="inline-block bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded text-xs font-medium self-start">Saat Ini</span>
+                            </div>
+                            <ul class="list-disc list-outside ml-4 text-sm md:text-base text-slate-400 space-y-1">
+                                <li>Merancang dan membangun Sistem Pemusatan Administrasi berbasis Web.</li>
+                                <li>Memimpin strategi kampanye digital dan manajemen informasi organisasi.</li>
+                            </ul>
+                        </div>
                     </div>
+
+                    <!-- Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 ml-4 md:ml-6">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-white">Freelance Web Developer</h3>
+                                    <h4 class="text-sm md:text-base font-medium text-blue-400">Independen</h4>
+                                </div>
+                                <span class="inline-block bg-slate-700 text-slate-300 px-2 py-1 rounded text-xs font-medium self-start">2023 - Sekarang</span>
+                            </div>
+                            <ul class="list-disc list-outside ml-4 text-sm md:text-base text-slate-400 space-y-1">
+                                <li>Mendeploy aplikasi e-voting terenkripsi untuk Musyawarah Cabang.</li>
+                                <li>Mengembangkan berbagai company profile dan landing page responsif.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
     </main>
 
-    <footer class="py-8 bg-slate-950 text-gray-400 text-center">
-        <div class="container mx-auto px-4">
-            <p>&copy; <span id="current-year"></span> El Syaja'ah - Zenithy Development.</p>
-        </div>
-    </footer>
+    <!-- Bottom Navigation Bar (App Style - Khusus Mobile) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 pb-safe pt-1 px-2 flex justify-around items-center h-[72px] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.5)]">
+        <a href="#home" class="nav-link-mobile active flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="home">
+            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span class="text-[10px] tracking-wide">Beranda</span>
+        </a>
+        
+        <a href="#tentang" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="tentang">
+            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="text-[10px] tracking-wide">Tentang</span>
+        </a>
+        
+        <a href="#proyek" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="proyek">
+            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span class="text-[10px] tracking-wide">Proyek</span>
+        </a>
+        
+        <a href="#pengalaman" class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-500" data-section="pengalaman">
+            <svg class="w-6 h-6 mb-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <span class="text-[10px] tracking-wide">Karier</span>
+        </a>
+
+        <a href="https://wa.me/62895357326927" target="_blank" class="flex flex-col items-center justify-center w-full h-full text-blue-500">
+            <div class="bg-blue-600/20 p-1.5 rounded-full mb-0.5">
+                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+            </div>
+            <span class="text-[10px] font-medium tracking-wide">Kontak</span>
+        </a>
+    </nav>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Logika Navigasi & Menu Mobile ---
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            // Toggle menu mobile
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                menuBtn.classList.toggle('open');
-                if (menuBtn.classList.contains('open')) {
-                    menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-                } else {
-                    menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-                }
-            });
-
-            // Tutup menu saat link diklik (di mobile)
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth < 768) {
-                        mobileMenu.classList.add('hidden');
-                        menuBtn.classList.remove('open');
-                        menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-                    }
-                });
-            });
-
-            // --- Logika Active Link on Scroll ---
+            // --- Active Link on Scroll (Untuk Desktop & Mobile Bottom Nav) ---
             const sections = document.querySelectorAll('section');
+            const navLinksDesktop = document.querySelectorAll('.nav-link-desktop');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
                         const id = entry.target.id;
-                        navLinks.forEach(link => {
+                        
+                        // Update Desktop Nav
+                        navLinksDesktop.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.dataset.section === id) {
+                                link.classList.add('active');
+                            }
+                        });
+
+                        // Update Mobile Nav
+                        navLinksMobile.forEach(link => {
                             link.classList.remove('active');
                             if (link.dataset.section === id) {
                                 link.classList.add('active');
@@ -382,102 +386,73 @@
                         });
                     }
                 });
-            }, {
-                threshold: 0.6 
-            });
+            }, { threshold: 0.4 });
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+            sections.forEach(section => observer.observe(section));
 
-            // --- Logika Filter Proyek ---
-            const filterContainer = document.getElementById('project-filters');
-            const projectCards = document.querySelectorAll('#project-grid .project-card');
-
-            if (filterContainer) {
-                filterContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('filter-btn') && !e.target.classList.contains('active')) {
-                        filterContainer.querySelector('.active').classList.remove('active');
-                        e.target.classList.add('active');
-                        
-                        const filter = e.target.dataset.filter;
-
-                        projectCards.forEach(card => {
-                            const category = card.dataset.category;
-                            if (filter === 'semua' || filter === category) {
-                                card.style.display = 'flex';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                    }
+            // Klik di Mobile Nav
+            navLinksMobile.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinksMobile.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
                 });
-            }
+            });
 
-            // --- Logika Chart.js ---
+            // --- Logika Chart.js Radar ---
             const ctx = document.getElementById('skillsChart');
             if (ctx) {
                 const skillsChart = new Chart(ctx, {
                     type: 'radar',
                     data: {
                         labels: [
-                            'Laravel & PHP', 
-                            'JavaScript', 
-                            'HTML & CSS', 
-                            'Design (Affinity/Canva)', 
+                            'Laravel/PHP', 
+                            'Tailwind/JS', 
+                            'UI/UX Design', 
                             'Database', 
-                            'Digital Marketing'
+                            'Prompt Eng.', 
+                            'Manajemen'
                         ],
                         datasets: [{
-                            label: 'Tingkat Keahlian',
-                            data: [85, 75, 90, 80, 75, 70],
-                            backgroundColor: 'rgba(59, 130, 246, 0.2)', 
+                            label: 'Kemampuan',
+                            data: [85, 75, 80, 80, 75, 90],
+                            backgroundColor: 'rgba(59, 130, 246, 0.25)', 
                             borderColor: 'rgba(59, 130, 246, 1)', 
-                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                            borderWidth: 2,
+                            pointBackgroundColor: '#1E293B',
+                            pointBorderColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
                         }]
                     },
                     options: {
                         maintainAspectRatio: false,
                         scales: {
                             r: {
-                                angleLines: {
-                                    color: 'rgba(255, 255, 255, 0.2)'
-                                },
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.2)'
-                                },
+                                angleLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
                                 pointLabels: {
-                                    color: 'rgba(255, 255, 255, 0.8)',
-                                    font: {
-                                        size: 13
-                                    }
+                                    color: 'rgba(148, 163, 184, 1)',
+                                    font: { size: window.innerWidth < 768 ? 10 : 12, family: "'Inter', sans-serif" }
                                 },
-                                ticks: {
-                                    color: 'rgba(255, 255, 255, 0.7)',
-                                    backdropColor: 'rgba(0, 0, 0, 0.5)',
-                                    stepSize: 20
-                                }
+                                ticks: { display: false, min: 0, max: 100, stepSize: 20 }
                             }
                         },
                         plugins: {
-                            legend: {
-                                labels: {
-                                    color: 'rgba(255, 255, 255, 0.8)'
-                                }
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                                titleFont: { family: "'Inter', sans-serif" },
+                                bodyFont: { family: "'Inter', sans-serif" },
+                                padding: 10,
+                                cornerRadius: 8,
+                                displayColors: false
                             }
                         }
                     }
                 });
             }
-
-            // --- Tahun di Footer ---
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-
         });
     </script>
-
 </body>
 </html>
