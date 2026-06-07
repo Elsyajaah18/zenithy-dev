@@ -64,13 +64,13 @@
 
         /* Garis Waktu Pengalaman */
         .timeline-item {
-            @apply relative pl-8 pb-12 border-l-2 border-slate-700;
+            @apply relative pl-6 md:pl-8 pb-8 md:pb-12 border-l-2 border-slate-700;
         }
         .timeline-item:last-child {
             @apply border-l-0 pb-0;
         }
         .timeline-dot {
-            @apply absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1;
+            @apply absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1 md:top-2;
             box-shadow: 0 0 0 4px #0F172A;
         }
         
@@ -116,8 +116,8 @@
             <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
                 <div class="md:order-2 flex justify-center relative w-full">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl transform rotate-3 scale-105 opacity-50 blur-lg -z-10 pointer-events-none"></div>
-                    <!-- Path gambar sudah diubah ke assets/ -->
-                    <img src="assets/foto-profil.jpg" alt="Dhohuk Gemalo El Syaja'ah" class="w-[80%] sm:w-2/3 md:w-full max-w-sm rounded-3xl shadow-2xl border border-slate-700 object-cover relative z-10" onerror="this.onerror=null; this.src='https://placehold.co/400x500/1E293B/FFFFFF?text=Foto+Profil';">
+                    <!-- Foto sudah dikecilkan ukurannya -->
+                    <img src="assets/foto-profil.jpg" alt="Dhohuk Gemalo El Syaja'ah" class="w-56 sm:w-64 md:w-full max-w-[240px] md:max-w-xs lg:max-w-sm rounded-3xl shadow-2xl border border-slate-700 object-cover relative z-10 mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/400x500/1E293B/FFFFFF?text=Foto+Profil';">
                 </div>
                 
                 <div class="md:order-1 text-center md:text-left z-10">
@@ -243,10 +243,38 @@
                 </div>
 
                 <div class="max-w-5xl mx-auto space-y-8 sm:space-y-12 w-full">
+                    
+                    <!-- Project 1: Sistem Admin IMM -->
+                    <div class="project-card flex flex-col md:flex-row group w-full rounded-2xl">
+                        <!-- Wrapper dan gambar sekarang memiliki border-radius yang jelas -->
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800 shrink-0 rounded-t-2xl md:rounded-t-none md:rounded-l-2xl">
+                            <img src="https://placehold.co/800x600/0F172A/3B82F6?text=Sistem+Admin+IMM" alt="Sistem Pemusatan Administrasi IMM" class="w-full h-48 sm:h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700 rounded-t-2xl md:rounded-t-none md:rounded-l-2xl">
+                            <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-blue-600 text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90">Sedang Dibangun</div>
+                        </div>
+                        <div class="p-5 sm:p-6 md:p-8 flex flex-col justify-center w-full">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="p-1.5 bg-blue-500/20 rounded-md">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </span>
+                                <span class="text-blue-400 text-xs sm:text-sm font-semibold tracking-wide uppercase">Web Application</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 leading-tight">Sistem Pemusatan Administrasi IMM</h3>
+                            <p class="text-slate-400 mb-5 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
+                                Aplikasi berbasis web terintegrasi yang dirancang untuk mendigitalisasi dan memusatkan seluruh alur administrasi Ikatan Mahasiswa Muhammadiyah (IMM). Sistem ini mengelola pendataan kader, arsip persuratan, hingga manajemen inventaris secara aman, real-time, dan terstruktur.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">Laravel 11</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">Tailwind CSS</span>
+                                <span class="text-[10px] sm:text-xs font-medium bg-slate-900 text-slate-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-700 shadow-inner">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Project 2: Web PC IMM A.K. Anshori -->
-                    <div class="project-card flex flex-col md:flex-row-reverse group w-full">
-                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800 shrink-0">
-                            <img src="assets/foto-web.jpg" alt="Portal Web PC IMM A.K. Anshori" class="w-full h-48 sm:h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    <div class="project-card flex flex-col md:flex-row-reverse group w-full rounded-2xl">
+                        <!-- Wrapper dan gambar sekarang memiliki border-radius yang jelas -->
+                        <div class="relative w-full md:w-1/2 overflow-hidden bg-slate-800 shrink-0 rounded-t-2xl md:rounded-t-none md:rounded-r-2xl">
+                            <img src="https://placehold.co/800x600/1E293B/818CF8?text=Portal+PC+IMM+A.K.+Anshori" alt="Portal Web PC IMM A.K. Anshori" class="w-full h-48 sm:h-64 md:h-full object-cover transform group-hover:scale-105 transition-transform duration-700 rounded-t-2xl md:rounded-t-none md:rounded-r-2xl">
                         </div>
                         <div class="p-5 sm:p-6 md:p-8 flex flex-col justify-center w-full">
                             <div class="flex flex-wrap items-center justify-between mb-3 gap-2">
@@ -285,11 +313,12 @@
                     <div class="w-16 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
                 </div>
 
-                <div class="space-y-0 pl-2">
+                <!-- Margin dihapus dan kontainer di-center -->
+                <div class="max-w-2xl mx-auto px-2 sm:px-0">
                     <!-- Item 1 -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-4 sm:p-5 md:p-6 ml-3 sm:ml-4 md:ml-6 w-full">
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 w-full shadow-md">
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                                 <div>
                                     <h3 class="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">Kepala Bidang Medkom</h3>
@@ -307,7 +336,7 @@
                     <!-- Item 2 -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-4 sm:p-5 md:p-6 ml-3 sm:ml-4 md:ml-6 w-full">
+                        <div class="bg-slate-800/40 border border-slate-700 rounded-2xl p-5 md:p-6 w-full shadow-md">
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                                 <div>
                                     <h3 class="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">Freelance Web Developer</h3>
